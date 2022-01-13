@@ -3,12 +3,14 @@ package com.ruiter.introtocompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.ruiter.introtocompose.ui.theme.IntroToComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,13 +19,19 @@ class MainActivity : ComponentActivity() {
         setContent {
             IntroToComposeTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.primary) {
-                    Column() {
-                        Greeting("There")
-                        ShowAge(age = 32)
-                    }
-                }
+                MyApp()
             }
+        }
+    }
+}
+
+@Composable
+fun MyApp() {
+    Surface(modifier = Modifier.fillMaxWidth(),
+        color = MaterialTheme.colors.primary) {
+        Column() {
+            Greeting("There")
+            ShowAge(age = 32)
         }
     }
 }
@@ -42,7 +50,6 @@ fun ShowAge(age: Int) {
 @Composable
 fun DefaultPreview() {
     IntroToComposeTheme {
-        Greeting("world!")
-        ShowAge(age = 30)
+        MyApp()
     }
 }

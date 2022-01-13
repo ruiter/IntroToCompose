@@ -4,10 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -27,11 +30,28 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MyApp() {
-    Surface(modifier = Modifier.fillMaxWidth(),
-        color = MaterialTheme.colors.primary) {
+    Surface(
+        modifier = Modifier.fillMaxWidth(),
+        color = MaterialTheme.colors.primary
+    ) {
         Column() {
             Greeting("There")
             ShowAge(age = 32)
+        }
+    }
+}
+
+@Preview
+@Composable
+fun CreateCircleCard() {
+    Card(
+        modifier = Modifier
+            .padding(4.dp)
+            .size(45.dp),
+        shape = CircleShape
+    ) {
+        Box(contentAlignment = Alignment.Center) {
+            Text(text = "Tap")
         }
     }
 }

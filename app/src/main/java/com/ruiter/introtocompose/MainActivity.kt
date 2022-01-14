@@ -1,7 +1,6 @@
 package com.ruiter.introtocompose
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
@@ -36,6 +35,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MyApp() {
+    var moneyCounter = remember {
+        mutableStateOf(0)
+    }
+
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -51,38 +54,32 @@ fun MyApp() {
                     color = Color.White,
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Bold
-                ), text = "$100"
+                ), text = "$${moneyCounter.value}"
             )
             Spacer(modifier = Modifier.height(40.dp))
-            CreateCircleCard()
+
+            CreateCircleCard(moneyCounter.value) { newValue ->
+                moneyCounter.value = newValue
+            }
         }
     }
 }
 
-@Preview
 @Composable
-fun CreateCircleCard() {
-//    var moneyCounter by remember {
-//        mutableStateOf(0)
-//    }
-
-    var moneyCounter = remember {
-        mutableStateOf(0)
-    }
+fun CreateCircleCard(moneyCounter: Int, updateMoneyCounter: (Int) -> Unit) {
 
     Card(
         modifier = Modifier
             .padding(4.dp)
             .size(85.dp)
             .clickable {
-                Log.i("ruiter", "CreateCircleCard: tap ")
-                moneyCounter.value += 1
+                updateMoneyCounter(moneyCounter + 1)
             },
         shape = CircleShape,
         elevation = 4.dp
     ) {
         Box(contentAlignment = Alignment.Center) {
-            Text(text = "Tap ${moneyCounter.value}")
+            Text(text = "Tap")
         }
     }
 }

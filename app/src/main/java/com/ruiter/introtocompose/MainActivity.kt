@@ -62,7 +62,11 @@ fun MyApp() {
 @Preview
 @Composable
 fun CreateCircleCard() {
-    var moneyCounter by remember {
+//    var moneyCounter by remember {
+//        mutableStateOf(0)
+//    }
+
+    var moneyCounter = remember {
         mutableStateOf(0)
     }
 
@@ -72,13 +76,13 @@ fun CreateCircleCard() {
             .size(85.dp)
             .clickable {
                 Log.i("ruiter", "CreateCircleCard: tap ")
-                moneyCounter += 1
+                moneyCounter.value += 1
             },
         shape = CircleShape,
         elevation = 4.dp
     ) {
         Box(contentAlignment = Alignment.Center) {
-            Text(text = "Tap $moneyCounter")
+            Text(text = "Tap ${moneyCounter.value}")
         }
     }
 }

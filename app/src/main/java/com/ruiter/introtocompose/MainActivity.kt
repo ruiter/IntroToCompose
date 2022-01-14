@@ -1,8 +1,10 @@
 package com.ruiter.introtocompose
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
@@ -12,8 +14,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.ruiter.introtocompose.ui.theme.IntroToComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -31,12 +37,22 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyApp() {
     Surface(
-        modifier = Modifier.fillMaxWidth(),
-        color = MaterialTheme.colors.primary
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(),
+        color = Color(0xFFB383D2)
     ) {
-        Column() {
-            Greeting("There")
-            ShowAge(age = 32)
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(style = TextStyle(
+                color = Color.White,
+                fontSize = 30.sp,
+                fontWeight = FontWeight.Bold
+            ), text = "$100")
+            Spacer(modifier = Modifier.height(40.dp))
+            CreateCircleCard()
         }
     }
 }
@@ -47,8 +63,10 @@ fun CreateCircleCard() {
     Card(
         modifier = Modifier
             .padding(4.dp)
-            .size(45.dp),
-        shape = CircleShape
+            .size(85.dp)
+            .clickable { Log.i("ruiter", "CreateCircleCard: tap ") },
+        shape = CircleShape,
+        elevation = 4.dp
     ) {
         Box(contentAlignment = Alignment.Center) {
             Text(text = "Tap")
